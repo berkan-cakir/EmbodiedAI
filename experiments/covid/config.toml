@@ -1,2 +1,19 @@
 [base]
 swarm_type       = 'covid'
+n_agents        = 40
+scenario        = 'A'
+object_location = [500, 500]
+scale           = [800, 800]
+
+[screen]
+frames = inf
+height = 1000
+width  = 1000
+
+[agent]
+height    = 10
+width     = 10
+dt        = 0.2
+mass      = 20
+max_speed = 7.0
+min_speed = 4.0
