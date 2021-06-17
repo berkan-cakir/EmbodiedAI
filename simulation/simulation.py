@@ -10,6 +10,8 @@ from experiments.aggregation.aggregation import Aggregations
 from experiments.covid.population import Population
 from experiments.flocking.flock import Flock
 
+from experiments.covid.config import config
+
 
 def _plot_covid(data) -> None:
     """
@@ -119,10 +121,63 @@ class Simulation:
             if event.type == pygame.QUIT:
                 self.running = False
 
+        if config["base"]["dynamic"]:
+            self.dynamic_map_update()
+
         self.swarm.update()
         self.swarm.display(self.screen)
 
         pygame.display.flip()
+
+    def dynamic_map_update(self):
+        agents_infected_pos = []
+        for person in self.swarm.agents:
+            if person.mode == 'infected':
+                agents_infected_pos.append(person.pos)
+
+        if config["base"]["scenario"] == 'B':
+            sector_infected1 = 0
+            sector_infected2 = 0
+
+            for pos in agents_infected_pos:
+                if self.in_pos(pos, 0, 499, 0, 1000):
+                    sector_infected1 += 1
+                elif self.in_pos(pos, 500, 1000, 0, 1000):
+                    sector_infected2 += 1
+
+            if sector_infected1 > config["base"]["n_lockdown"] or sector_infected2 > config["base"]["n_lockdown"]:
+                if len(self.swarm.objects.wall0.sprites()) == 0:
+                    self.swarm.objects.add_object(file="experiments/covid/images/wall.png",
+                                                  pos=[500, 500],
+                                                  scale=[5, 800],
+                                                  obj_type="wall0")
+            else:
+                if len(self.swarm.objects.wall0.sprites()) > 0:
+                    self.swarm.objects.wall0.sprites()[0].kill()
+
+        elif config["base"]["scenario"] == 'D':
+            sector_infected1 = 0
+            sector_infected2 = 0
+            sector_infected3 = 0
+            sector_infected4 = 0
+
+        # for object in self.swarm.objects.obstacles.sprites():
+        #     object.kill()
+        #
+        # for person in self.swarm.agents:
+        #     print(person.pos)
+        #     print(person.mode)
+
+    def in_pos(self, pos, x1, x2, y1, y2):
+        pos_x = int(pos[0])
+        pos_y = int(pos[1])
+
+        if x1 < pos_x < x2 and y1 < pos_y < y2:
+            return True
+        else:
+            return False
+
+
 
     def run(self) -> None:
         """

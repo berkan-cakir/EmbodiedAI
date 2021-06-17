@@ -1,7 +1,9 @@
 [base]
 swarm_type       = 'covid'
 n_agents        = 40
-scenario        = 'A'
+scenario        = 'B'
+dynamic         = true
+n_lockdown      = 5
 object_location = [500, 500]
 scale           = [800, 800]
 

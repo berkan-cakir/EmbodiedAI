@@ -40,10 +40,10 @@ class Population(Swarm):
         self.points_to_plot = {'S': [], 'I': [], 'R': []}
 
         if config["base"]["scenario"] == 'A':
-            self.objects.add_object(file="experiments/covid/images/2.png",
-                                    pos=[500, 500],
-                                    scale=config["base"]["scale"],
-                                    obj_type="obstacle")
+                self.objects.add_object(file="experiments/covid/images/2.png",
+                                        pos=[500, 500],
+                                        scale=config["base"]["scale"],
+                                        obj_type="obstacle")
         elif config["base"]["scenario"] == 'B':
             self.objects.add_object(file="experiments/covid/images/2_partial.png",
                                     pos=[500, 500],
@@ -60,7 +60,19 @@ class Population(Swarm):
                                     scale=config["base"]["scale"],
                                     obj_type="obstacle")
         elif config["base"]["scenario"] == 'E':
-            pass
+            self.objects.add_object(file="experiments/covid/images/4_partial.png",
+                                    pos=[500, 500],
+                                    scale=config["base"]["scale"],
+                                    obj_type="obstacle")
+            self.objects.add_object(file="experiments/covid/images/wall.png",
+                                          pos=[500, 500],
+                                          scale=[5, 800],
+                                          obj_type="obstacle")
+
+        #print(self.objects.obstacles.sprites()[0])
+        # print(self.objects.obstacles.sprites()[0].__hash__())
+        # print(self.objects.obstacles.sprites()[1].__hash__())
+        # print(self.objects.obstacles.sprites()[0].kill())
 
         min_x, max_x = area(config["base"]["object_location"][0], config["base"]["scale"][0])
         min_y, max_y = area(config["base"]["object_location"][1], config["base"]["scale"][1])
@@ -75,8 +87,7 @@ class Population(Swarm):
             ):
                 coordinates = generate_coordinates(self.screen)
 
-            if index == 0:
-                mode = 'infected'
+            if index % 15 == 0:
+                self.add_agent(Person(pos=np.array(coordinates), v=None, population=self, index=index, mode='infected', color='red'))
             else:
-                mode = 'susceptible'
-            self.add_agent(Person(pos=np.array(coordinates), v=None, population=self, index=index, mode=mode))
+                self.add_agent(Person(pos=np.array(coordinates), v=None, population=self, index=index, mode='susceptible', color='blue'))

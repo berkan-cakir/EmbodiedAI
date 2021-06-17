@@ -7,11 +7,11 @@ from simulation.utils import *
 
 
 class Person(Agent):
-    def __init__(self, pos, v, population, index: int, mode, image: str = "experiments/covid/images/susceptible.png") -> None:
+    def __init__(self, pos, v, population, index: int, mode, color, image: str = "experiments/covid/images/susceptible.png") -> None:
         super(Person, self).__init__(
             pos,
             v,
-            color='blue',
+            color=color,
             index=index,
             max_speed=config["agent"]["max_speed"],
             min_speed=config["agent"]["min_speed"],
@@ -34,10 +34,33 @@ class Person(Agent):
         neighbours = self.population.find_neighbors(self, self.view_radius)
         self.timer += 1
 
-        #print(self.image)
-
         for obstacle in self.population.objects.obstacles:
             collide = pygame.sprite.collide_mask(self, obstacle)
+            if bool(collide):
+                self.avoid_obstacle()
+
+        for wall0 in self.population.objects.wall0:
+            collide = pygame.sprite.collide_mask(self, wall0)
+            if bool(collide):
+                self.avoid_obstacle()
+
+        for wall1 in self.population.objects.wall1:
+            collide = pygame.sprite.collide_mask(self, wall1)
+            if bool(collide):
+                self.avoid_obstacle()
+
+        for wall2 in self.population.objects.wall2:
+            collide = pygame.sprite.collide_mask(self, wall2)
+            if bool(collide):
+                self.avoid_obstacle()
+
+        for wall3 in self.population.objects.wall3:
+            collide = pygame.sprite.collide_mask(self, wall3)
+            if bool(collide):
+                self.avoid_obstacle()
+
+        for wall4 in self.population.objects.wall4:
+            collide = pygame.sprite.collide_mask(self, wall4)
             if bool(collide):
                 self.avoid_obstacle()
 
@@ -78,7 +101,3 @@ class Person(Agent):
                 self.population.datapoints.append('I')
             elif person.mode == 'removed':
                 self.population.datapoints.append('R')
-
-    # def get_pos(self):
-    #     print(self.pos)
-    #     return self.pos
