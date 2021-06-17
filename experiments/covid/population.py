@@ -39,7 +39,12 @@ class Population(Swarm):
 
         self.points_to_plot = {'S': [], 'I': [], 'R': []}
 
-        if config["base"]["scenario"] == 'A':
+        if config["base"]["scenario"] == 'Z':
+            self.objects.add_object(file="experiments/covid/images/box.png",
+                                    pos=[500, 500],
+                                    scale=config["base"]["scale"],
+                                    obj_type="obstacle")
+        elif config["base"]["scenario"] == 'A':
                 self.objects.add_object(file="experiments/covid/images/2.png",
                                         pos=[500, 500],
                                         scale=config["base"]["scale"],
