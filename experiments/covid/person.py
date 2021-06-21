@@ -7,7 +7,7 @@ from simulation.utils import *
 
 
 class Person(Agent):
-    def __init__(self, pos, v, population, index: int, mode, color, image: str = "experiments/covid/images/susceptible.png") -> None:
+    def __init__(self, pos, v, population, index: int, mode, color='blue', image: str = "experiments/covid/images/susceptible.png") -> None:
         super(Person, self).__init__(
             pos,
             v,
@@ -23,7 +23,7 @@ class Person(Agent):
 
         self.population = population
         self.timer = 0
-        self.view_radius = 40
+        self.view_radius = config['agent']['radius']
         self.mode = mode
         self.p_infection = 0.1
         base_image, rect = image_with_rect(image, [10, 10])

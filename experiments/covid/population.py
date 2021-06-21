@@ -71,16 +71,12 @@ class Population(Swarm):
                                     obj_type="obstacle")
             self.objects.add_object(file="experiments/covid/images/wall.png",
                                           pos=[500, 500],
-                                          scale=[5, 800],
+                                          scale=[46, 800],
                                           obj_type="obstacle")
 
-        #print(self.objects.obstacles.sprites()[0])
-        # print(self.objects.obstacles.sprites()[0].__hash__())
-        # print(self.objects.obstacles.sprites()[1].__hash__())
-        # print(self.objects.obstacles.sprites()[0].kill())
 
-        min_x, max_x = area(config["base"]["object_location"][0], config["base"]["scale"][0])
-        min_y, max_y = area(config["base"]["object_location"][1], config["base"]["scale"][1])
+        min_x, max_x = 110, 440
+        min_y, max_y = 110, 800
         for index, agent in enumerate(range(num_agents)):
             coordinates = generate_coordinates(self.screen)
 
@@ -92,7 +88,7 @@ class Population(Swarm):
             ):
                 coordinates = generate_coordinates(self.screen)
 
-            if index % 15 == 0:
-                self.add_agent(Person(pos=np.array(coordinates), v=None, population=self, index=index, mode='infected', color='red'))
+            if index % 35 == 0:
+                self.add_agent(Person(pos=np.array(coordinates), v=None, population=self, index=index, mode='infected'))
             else:
-                self.add_agent(Person(pos=np.array(coordinates), v=None, population=self, index=index, mode='susceptible', color='blue'))
+                self.add_agent(Person(pos=np.array(coordinates), v=None, population=self, index=index, mode='susceptible'))

@@ -149,7 +149,7 @@ class Simulation:
                 if len(self.swarm.objects.wall0.sprites()) == 0:
                     self.swarm.objects.add_object(file="experiments/covid/images/wall.png",
                                                   pos=[500, 500],
-                                                  scale=[5, 800],
+                                                  scale=[46, 800],
                                                   obj_type="wall0")
             else:
                 if len(self.swarm.objects.wall0.sprites()) > 0:
