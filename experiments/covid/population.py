@@ -65,18 +65,15 @@ class Population(Swarm):
                                     scale=config["base"]["scale"],
                                     obj_type="obstacle")
         elif config["base"]["scenario"] == 'E':
-            self.objects.add_object(file="experiments/covid/images/4_partial.png",
+            self.objects.add_object(file="experiments/covid/images/6_partial.png",
                                     pos=[500, 500],
                                     scale=config["base"]["scale"],
                                     obj_type="obstacle")
-            self.objects.add_object(file="experiments/covid/images/wall.png",
-                                          pos=[500, 500],
-                                          scale=[46, 800],
-                                          obj_type="obstacle")
 
 
-        min_x, max_x = 110, 440
-        min_y, max_y = 110, 800
+        min_x, max_x = 550, 950
+        min_y, max_y = 750, 950
+
         for index, agent in enumerate(range(num_agents)):
             coordinates = generate_coordinates(self.screen)
 

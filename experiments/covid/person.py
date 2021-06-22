@@ -64,6 +64,51 @@ class Person(Agent):
             if bool(collide):
                 self.avoid_obstacle()
 
+        for wall5 in self.population.objects.wall5:
+            collide = pygame.sprite.collide_mask(self, wall5)
+            if bool(collide):
+                self.avoid_obstacle()
+
+        for wall6 in self.population.objects.wall6:
+            collide = pygame.sprite.collide_mask(self, wall6)
+            if bool(collide):
+                self.avoid_obstacle()
+
+        for wall7 in self.population.objects.wall7:
+            collide = pygame.sprite.collide_mask(self, wall7)
+            if bool(collide):
+                self.avoid_obstacle()
+
+        for wall8 in self.population.objects.wall8:
+            collide = pygame.sprite.collide_mask(self, wall8)
+            if bool(collide):
+                self.avoid_obstacle()
+
+        for wall9 in self.population.objects.wall9:
+            collide = pygame.sprite.collide_mask(self, wall9)
+            if bool(collide):
+                self.avoid_obstacle()
+
+        for wall10 in self.population.objects.wall10:
+            collide = pygame.sprite.collide_mask(self, wall10)
+            if bool(collide):
+                self.avoid_obstacle()
+
+        for wall11 in self.population.objects.wall11:
+            collide = pygame.sprite.collide_mask(self, wall11)
+            if bool(collide):
+                self.avoid_obstacle()
+
+        for wall12 in self.population.objects.wall12:
+            collide = pygame.sprite.collide_mask(self, wall12)
+            if bool(collide):
+                self.avoid_obstacle()
+
+        for wall13 in self.population.objects.wall12:
+            collide = pygame.sprite.collide_mask(self, wall13)
+            if bool(collide):
+                self.avoid_obstacle()
+
         if self.timer % 50 == 0:
             for neighbour in neighbours:
                 if neighbour.mode == 'infected' and self.mode == 'susceptible' and self.p_infection < np.random.rand():

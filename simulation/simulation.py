@@ -155,11 +155,135 @@ class Simulation:
                 if len(self.swarm.objects.wall0.sprites()) > 0:
                     self.swarm.objects.wall0.sprites()[0].kill()
 
-        elif config["base"]["scenario"] == 'D':
+        elif config["base"]["scenario"] == 'E':
             sector_infected1 = 0
             sector_infected2 = 0
             sector_infected3 = 0
             sector_infected4 = 0
+            sector_infected5 = 0
+            sector_infected6 = 0
+
+            for pos in agents_infected_pos:
+                if self.in_pos(pos, 55, 450, 55, 250):
+                    sector_infected1 += 1
+                elif self.in_pos(pos, 450, 945, 55, 250):
+                    sector_infected2 += 1
+                elif self.in_pos(pos, 55, 450, 350, 650):
+                    sector_infected3 += 1
+                elif self.in_pos(pos, 550, 950, 350, 650):
+                    sector_infected4 += 1
+                elif self.in_pos(pos, 55, 450, 750, 950):
+                    sector_infected5 += 1
+                elif self.in_pos(pos, 550, 950, 750, 950):
+                    sector_infected6 += 1
+
+            if sector_infected1 > config["base"]["n_lockdown"]:
+                if len(self.swarm.objects.wall0.sprites()) == 0:
+                    self.swarm.objects.add_object(file="experiments/covid/images/wall.png",
+                                                  pos=[500, 155],
+                                                  scale=[46, 255],
+                                                  obj_type="wall0")
+                    self.swarm.objects.add_object(file="experiments/covid/images/wall.png",
+                                                  pos=[255, 302.5],
+                                                  scale=[455, 46],
+                                                  obj_type="wall2")
+            else:
+                if len(self.swarm.objects.wall0.sprites()) > 0:
+                    self.swarm.objects.wall0.sprites()[0].kill()
+                if len(self.swarm.objects.wall2.sprites()) > 0:
+                    self.swarm.objects.wall2.sprites()[0].kill()
+
+            if sector_infected2 > config["base"]["n_lockdown"]:
+                if len(self.swarm.objects.wall1.sprites()) == 0:
+                    self.swarm.objects.add_object(file="experiments/covid/images/wall.png",
+                                                  pos=[500, 155],
+                                                  scale=[46, 255],
+                                                  obj_type="wall1")
+                    self.swarm.objects.add_object(file="experiments/covid/images/wall.png",
+                                                  pos=[745, 302.5],
+                                                  scale=[455, 46],
+                                                  obj_type="wall3")
+            else:
+                if len(self.swarm.objects.wall1.sprites()) > 0:
+                    self.swarm.objects.wall1.sprites()[0].kill()
+                if len(self.swarm.objects.wall3.sprites()) > 0:
+                    self.swarm.objects.wall3.sprites()[0].kill()
+
+            if sector_infected3 > config["base"]["n_lockdown"]:
+                if len(self.swarm.objects.wall3.sprites()) == 0:
+                    self.swarm.objects.add_object(file="experiments/covid/images/wall.png",
+                                                  pos=[255, 302.5],
+                                                  scale=[455, 46],
+                                                  obj_type="wall4")
+                    self.swarm.objects.add_object(file="experiments/covid/images/wall.png",
+                                                  pos=[500, 500],
+                                                  scale=[46, 400],
+                                                  obj_type="wall6")
+                    self.swarm.objects.add_object(file="experiments/covid/images/wall.png",
+                                                  pos=[255, 700],
+                                                  scale=[455, 46],
+                                                  obj_type="wall8")
+            else:
+                if len(self.swarm.objects.wall4.sprites()) > 0:
+                    self.swarm.objects.wall4.sprites()[0].kill()
+                if len(self.swarm.objects.wall6.sprites()) > 0:
+                    self.swarm.objects.wall6.sprites()[0].kill()
+                if len(self.swarm.objects.wall8.sprites()) > 0:
+                    self.swarm.objects.wall8.sprites()[0].kill()
+
+            if sector_infected4 > config["base"]["n_lockdown"]:
+                if len(self.swarm.objects.wall5.sprites()) == 0:
+                    self.swarm.objects.add_object(file="experiments/covid/images/wall.png",
+                                                  pos=[745, 302.5],
+                                                  scale=[455, 46],
+                                                  obj_type="wall5")
+                    self.swarm.objects.add_object(file="experiments/covid/images/wall.png",
+                                                  pos=[500, 500],
+                                                  scale=[46, 400],
+                                                  obj_type="wall7")
+                    self.swarm.objects.add_object(file="experiments/covid/images/wall.png",
+                                                  pos=[745, 700],
+                                                  scale=[455, 46],
+                                                  obj_type="wall9")
+            else:
+                if len(self.swarm.objects.wall5.sprites()) > 0:
+                    self.swarm.objects.wall5.sprites()[0].kill()
+                if len(self.swarm.objects.wall7.sprites()) > 0:
+                    self.swarm.objects.wall7.sprites()[0].kill()
+                if len(self.swarm.objects.wall9.sprites()) > 0:
+                    self.swarm.objects.wall9.sprites()[0].kill()
+
+            if sector_infected5 > config["base"]["n_lockdown"]:
+                if len(self.swarm.objects.wall10.sprites()) == 0:
+                    self.swarm.objects.add_object(file="experiments/covid/images/wall.png",
+                                                  pos=[255, 700],
+                                                  scale=[455, 46],
+                                                  obj_type="wall10")
+                    self.swarm.objects.add_object(file="experiments/covid/images/wall.png",
+                                                  pos=[500, 845],
+                                                  scale=[46, 255],
+                                                  obj_type="wall12")
+            else:
+                if len(self.swarm.objects.wall10.sprites()) > 0:
+                    self.swarm.objects.wall10.sprites()[0].kill()
+                if len(self.swarm.objects.wall12.sprites()) > 0:
+                    self.swarm.objects.wall12.sprites()[0].kill()
+
+            if sector_infected6 > config["base"]["n_lockdown"]:
+                if len(self.swarm.objects.wall6.sprites()) == 0:
+                    self.swarm.objects.add_object(file="experiments/covid/images/wall.png",
+                                                  pos=[745, 700],
+                                                  scale=[455, 46],
+                                                  obj_type="wall11")
+                    self.swarm.objects.add_object(file="experiments/covid/images/wall.png",
+                                                  pos=[500, 845],
+                                                  scale=[46, 255],
+                                                  obj_type="wall13")
+            else:
+                if len(self.swarm.objects.wall1.sprites()) > 0:
+                    self.swarm.objects.wall11.sprites()[0].kill()
+                if len(self.swarm.objects.wall13.sprites()) > 0:
+                    self.swarm.objects.wall13.sprites()[0].kill()
 
         # for object in self.swarm.objects.obstacles.sprites():
         #     object.kill()

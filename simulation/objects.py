@@ -23,6 +23,15 @@ class Objects(pygame.sprite.Sprite):
         self.wall2 = pygame.sprite.Group()
         self.wall3 = pygame.sprite.Group()
         self.wall4 = pygame.sprite.Group()
+        self.wall5 = pygame.sprite.Group()
+        self.wall6 = pygame.sprite.Group()
+        self.wall7 = pygame.sprite.Group()
+        self.wall8 = pygame.sprite.Group()
+        self.wall9 = pygame.sprite.Group()
+        self.wall10 = pygame.sprite.Group()
+        self.wall11 = pygame.sprite.Group()
+        self.wall12 = pygame.sprite.Group()
+        self.wall13 = pygame.sprite.Group()
 
     def add_object(self, file, pos, scale, obj_type) -> None:
         """
@@ -40,6 +49,32 @@ class Objects(pygame.sprite.Sprite):
             self.sites.add(Object(filename=file, pos=np.array(pos), scale=scale))
         elif obj_type == "wall0":
             self.wall0.add(Object(filename=file, pos=np.array(pos), scale=scale))
+        elif obj_type == "wall1":
+            self.wall1.add(Object(filename=file, pos=np.array(pos), scale=scale))
+        elif obj_type == "wall2":
+            self.wall2.add(Object(filename=file, pos=np.array(pos), scale=scale))
+        elif obj_type == "wall3":
+            self.wall3.add(Object(filename=file, pos=np.array(pos), scale=scale))
+        elif obj_type == "wall4":
+            self.wall4.add(Object(filename=file, pos=np.array(pos), scale=scale))
+        elif obj_type == "wall5":
+            self.wall5.add(Object(filename=file, pos=np.array(pos), scale=scale))
+        elif obj_type == "wall6":
+            self.wall6.add(Object(filename=file, pos=np.array(pos), scale=scale))
+        elif obj_type == "wall7":
+            self.wall7.add(Object(filename=file, pos=np.array(pos), scale=scale))
+        elif obj_type == "wall8":
+            self.wall8.add(Object(filename=file, pos=np.array(pos), scale=scale))
+        elif obj_type == "wall9":
+            self.wall9.add(Object(filename=file, pos=np.array(pos), scale=scale))
+        elif obj_type == "wall10":
+            self.wall10.add(Object(filename=file, pos=np.array(pos), scale=scale))
+        elif obj_type == "wall11":
+            self.wall11.add(Object(filename=file, pos=np.array(pos), scale=scale))
+        elif obj_type == "wall12":
+            self.wall12.add(Object(filename=file, pos=np.array(pos), scale=scale))
+        elif obj_type == "wall13":
+            self.wall13.add(Object(filename=file, pos=np.array(pos), scale=scale))
         else:
             print("object type not specified")
 
