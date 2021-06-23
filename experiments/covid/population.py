@@ -17,27 +17,8 @@ class Population(Swarm):
             num_agents (int):
 
         """
-
-        # To Do
-        # code snipet (not complete) to avoid initializing agents on obstacles
-        # given some coordinates and obstacles in the environment, this repositions the agent
-        # coordinates = generate_coordinates(self.screen)
-        #
-        # if config["population"]["obstacles"]:  # you need to define this variable
-        #     for obj in self.objects.obstacles:
-        #         rel_coordinate = relative(
-        #             coordinates, (obj.rect[0], obj.rect[1])
-        #         )
-        #         try:
-        #             while obj.mask.get_at(rel_coordinate):
-        #                 coordinates = generate_coordinates(self.screen)
-        #                 rel_coordinate = relative(
-        #                     coordinates, (obj.rect[0], obj.rect[1])
-        #                 )
-        #         except IndexError:
-        #             pass
-
-        self.points_to_plot = {'S': [], 'I': [], 'R': []}
+        self.r0 = {1: config['base']['inf_index']}
+        self.points_to_plot = {'S': [], 'I': [], 'R': [], 'D':[]}
 
         if config["base"]["scenario"] == 'Z':
             self.objects.add_object(file="experiments/covid/images/box.png",
@@ -71,12 +52,22 @@ class Population(Swarm):
                                     obj_type="obstacle")
 
 
-        min_x, max_x = 550, 950
-        min_y, max_y = 750, 950
+        if config["base"]["scenario"] == 'E':
+            cities = [
+                (55, 450, 55, 250),(450, 945, 55, 250),
+                (55, 450, 350, 650),(550, 950, 350, 650),
+                (55, 450, 750, 950),(550, 950, 750, 950),
+            ]
+        else:
+            min_x, max_x = 550, 950
+            min_y, max_y = 100, 950
 
+        num_infected = config['base']['inf_index']
+        infected_agents = [random.randint(0,num_agents) for i in range(num_infected)]
         for index, agent in enumerate(range(num_agents)):
             coordinates = generate_coordinates(self.screen)
-
+            if config["base"]["scenario"] == 'E':
+                min_x, max_x, min_y, max_y = random.choice(cities)
             while (
                     coordinates[0] >= max_x
                     or coordinates[0] <= min_x
@@ -85,7 +76,7 @@ class Population(Swarm):
             ):
                 coordinates = generate_coordinates(self.screen)
 
-            if index % 35 == 0:
+            if index in infected_agents:
                 self.add_agent(Person(pos=np.array(coordinates), v=None, population=self, index=index, mode='infected'))
             else:
                 self.add_agent(Person(pos=np.array(coordinates), v=None, population=self, index=index, mode='susceptible'))

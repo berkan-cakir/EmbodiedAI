@@ -1,22 +1,39 @@
 [base]
 swarm_type       = 'covid'
-n_agents        = 70
+n_agents        = 100
+inf_index       = 10
 scenario        = 'E'
 dynamic         = true
 n_lockdown      = 5
 object_location = [500, 500]
 scale           = [950, 950]
-
+variable_infection = false # Change this
+social_distancing = false # Change this
 [screen]
 frames = inf
 height = 1000
 width  = 1000
 
 [agent]
-height    = 10
-width     = 10
+height    = 5
+width     = 5
 dt        = 0.2
 mass      = 20
 max_speed = 7.0
 min_speed = 4.0
 radius    = 40
+max_force = 8.0
+
+[person]
+# https://www.jamda.com/article/S1525-8610(20)30441-2/fulltext
+p_death = [0.003, 0.005, 0.011, 0.03, 0.095, 0.228, 0.296]
+groups = false # change this
+category = ['rich', 'poor']
+
+[rich]
+separation_strength = 4
+p_infection = 0.2
+
+[poor]
+separation_strength = 1
+p_infection = 0.4
