@@ -270,7 +270,7 @@ class Simulation:
                     self.swarm.objects.wall12.sprites()[0].kill()
 
             if sector_infected6 > config["base"]["n_lockdown"]:
-                if len(self.swarm.objects.wall6.sprites()) == 0:
+                if len(self.swarm.objects.wall11.sprites()) == 0:
                     self.swarm.objects.add_object(file="experiments/covid/images/wall.png",
                                                   pos=[745, 700],
                                                   scale=[455, 46],
