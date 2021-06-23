@@ -7,8 +7,8 @@ dynamic         = true
 n_lockdown      = 5
 object_location = [500, 500]
 scale           = [950, 950]
-variable_infection = false # Change this
-social_distancing = false # Change this
+variable_infection = true # Change this
+social_distancing = true # Change this
 [screen]
 frames = inf
 height = 1000

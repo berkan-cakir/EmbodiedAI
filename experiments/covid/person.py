@@ -35,7 +35,7 @@ class Person(Agent):
         self.inf_gen = 1 if self.mode == 'infected' else 0
         self.age = random.randint(20,89) # To keep ages between 20 to 90
         self.p_death = config['person']['p_death'][int(self.age/10) - 2]
-
+        self.separation_strength = 1
         if config['person']['groups']:
             self.group = random.choice(config['person']['category'])
             self.separation_strength = config[self.group]['separation_strength']
