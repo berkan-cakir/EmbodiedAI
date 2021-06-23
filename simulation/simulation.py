@@ -308,7 +308,7 @@ class Simulation:
                                                   scale=[46, 255],
                                                   obj_type="wall13")
             else:
-                if len(self.swarm.objects.wall1.sprites()) > 0:
+                if len(self.swarm.objects.wall11.sprites()) > 0:
                     self.swarm.objects.wall11.sprites()[0].kill()
                 if len(self.swarm.objects.wall13.sprites()) > 0:
                     self.swarm.objects.wall13.sprites()[0].kill()

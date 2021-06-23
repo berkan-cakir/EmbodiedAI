@@ -27,6 +27,7 @@ class Person(Agent):
         self.view_radius = config['agent']['radius']
         self.mode = mode
         self.p_infection = 0.1
+        self.p_infecting = 0.1
         width = config["agent"]["width"]
         height = config["agent"]["height"]
         base_image, rect = image_with_rect(image, [height, width])
@@ -35,12 +36,13 @@ class Person(Agent):
         self.inf_gen = 1 if self.mode == 'infected' else 0
         self.age = random.randint(20,89) # To keep ages between 20 to 90
         self.p_death = config['person']['p_death'][int(self.age/10) - 2]
-        self.separation_strength = 1
+        self.separation_strength = 3
         if config['person']['groups']:
             self.group = random.choice(config['person']['category'])
             self.separation_strength = config[self.group]['separation_strength']
             self.p_infection = config[self.group]['p_infection']
         if self.mode == 'infected': self.change_mode('infected')
+        print(self.separation_strength)
 
     def update_actions(self) -> None:
         neighbours = self.population.find_neighbors(self, self.view_radius)

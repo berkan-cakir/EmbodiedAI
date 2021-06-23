@@ -2,12 +2,12 @@
 swarm_type       = 'covid'
 n_agents        = 100
 inf_index       = 10
-scenario        = 'E'
+scenario        = 'Z'
 dynamic         = true
 n_lockdown      = 5
 object_location = [500, 500]
 scale           = [950, 950]
-variable_infection = true # Change this
+variable_infection = false # Change this
 social_distancing = true # Change this
 [screen]
 frames = inf
@@ -26,14 +26,14 @@ max_force = 8.0
 
 [person]
 # https://www.jamda.com/article/S1525-8610(20)30441-2/fulltext
-p_death = [0.003, 0.005, 0.011, 0.03, 0.095, 0.228, 0.296]
-groups = false # change this
-category = ['rich', 'poor']
+p_death = [0.003, 0.005, 0.011, 0.03, 0.095, 0.228, 0.296] # Change this
+groups = true # change this
+category = ['rich', 'poor'] # Change this
 
 [rich]
-separation_strength = 4
-p_infection = 0.2
+separation_strength = 4 # Change this
+p_infection = 0.2 # Change this
 
 [poor]
-separation_strength = 1
-p_infection = 0.4
+separation_strength = 1 # Change this
+p_infection = 0.4 # Change this
