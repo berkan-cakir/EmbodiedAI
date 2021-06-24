@@ -132,7 +132,7 @@ class Person(Agent):
                 else:
                     p_infection = self.p_infection
 
-                if neighbour.mode == 'infected' and self.mode == 'susceptible' and p_infection < np.random.rand():
+                if neighbour.mode == 'infected' and self.mode == 'susceptible' and p_infection > np.random.rand():
                     self.change_mode('infected')
                     self.inf_gen = neighbour.inf_gen + 1
                     self.update_r0(self.inf_gen)
