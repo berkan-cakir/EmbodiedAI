@@ -38,7 +38,8 @@ class Person(Agent):
         self.p_death = config['person']['p_death'][int(self.age/10) - 2]
         self.separation_strength = 3
         if config['person']['groups']:
-            self.group = random.choice(config['person']['category'])
+            num_agents = config['base']['n_agents']
+            self.assign_groups(num_agents, config['person']['ratio_rich_ppl'])
             self.separation_strength = config[self.group]['separation_strength']
             self.p_infection = config[self.group]['p_infection']
         if self.mode == 'infected': self.change_mode('infected')
@@ -238,3 +239,11 @@ class Person(Agent):
                 10 * separate * self.separation_strength / self.mass, config["agent"]["max_force"]
             )
             self.v = 0
+
+    def assign_groups(self,num_agents, ratio_rich_ppl):
+        rich_num = int(num_agents*ratio_rich_ppl)
+        indices = [i for i in range(num_agents)]
+        rich_ppl = random.sample(indices,rich_num)
+        for i in indices:
+            self.group = 'rich' if i in rich_ppl else 'poor'
+
