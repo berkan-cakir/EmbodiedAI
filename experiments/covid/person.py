@@ -26,8 +26,7 @@ class Person(Agent):
         self.timer = 0
         self.view_radius = config['agent']['radius']
         self.mode = mode
-        self.p_infection = 0.1
-        self.p_infecting = 0.1
+        self.p_infection = 0.4
         width = config["agent"]["width"]
         height = config["agent"]["height"]
         base_image, rect = image_with_rect(image, [height, width])
@@ -139,10 +138,11 @@ class Person(Agent):
                     self.inf_gen = neighbour.inf_gen + 1
                     self.update_r0(self.inf_gen)
                     self.data_update()
-                    if self.group == 'rich':
-                        self.rich_data_update()
-                    elif self.group == 'poor':
-                        self.poor_data_update()
+                    if config['person']['groups']:
+                        if self.group == 'rich':
+                            self.rich_data_update()
+                        elif self.group == 'poor':
+                            self.poor_data_update()
                     self.timer = 0
 
         if self.timer > 300 and self.mode == 'infected':
