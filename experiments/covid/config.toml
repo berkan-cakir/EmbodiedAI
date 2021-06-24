@@ -2,7 +2,7 @@
 swarm_type       = 'covid'
 n_agents        = 100
 inf_index       = 10
-scenario        = 'E'
+scenario        = 'Z'
 dynamic         = true
 n_lockdown      = 5
 object_location = [500, 500]

@@ -13,7 +13,7 @@ from experiments.flocking.flock import Flock
 from experiments.covid.config import config
 
 
-def _plot_covid(data, r0) -> None:
+def _plot_covid(data, r0, rich, poor) -> None:
     """
     Plot the data related to the covid experiment. The plot is based on the number of Susceptible,
     Infected and Recovered agents
@@ -41,7 +41,6 @@ def _plot_covid(data, r0) -> None:
     output_name_2 = "experiments/covid/plots/R0%s.png" % time.strftime(
         "-%m.%d.%y-%H:%M", time.localtime()
     )
-    new_infected = list(r0.values())
     gen_r0 = []
     r0_vals = list(r0.values())
     for index, val in enumerate(r0_vals):
@@ -51,10 +50,8 @@ def _plot_covid(data, r0) -> None:
             gen_r0.append(1)
 
     fig2 = plt.figure()
-    # avg_r0 = [sum(gen_r0)/len(gen_r0) for i in gen_r0]
     avg = sum(gen_r0) / len(gen_r0)
     avg_r0 = [avg for i in gen_r0]
-    # plt.plot(new_infected, label="New infections", color=(0, 0, 0))  # Black
     plt.plot(gen_r0, label="R_naught", color=(0, 0.5, 0.5))  # Black
     plt.plot(avg_r0, label="Avg R_naught", color=(0.5, 0.5, 0.5))  # Black
     plt.title("Covid-19 R_naught")
@@ -63,6 +60,39 @@ def _plot_covid(data, r0) -> None:
     plt.legend()
     fig2.savefig(output_name_2)
     plt.show()
+
+    output_name3 = "experiments/covid/plots/Rich-SIR%s.png" % time.strftime(
+        "-%m.%d.%y-%H:%M", time.localtime()
+    )
+    fig3 = plt.figure()
+    data = rich
+    plt.plot(data["S"], label="Susceptible", color=(1, 0.5, 0))  # Orange
+    plt.plot(data["I"], label="Infected", color=(1, 0, 0))  # Red
+    plt.plot(data["R"], label="Recovered", color=(0, 1, 0))  # Green
+    plt.plot(data["D"], label="Dead", color=(0, 0, 0))  # Black
+    plt.title("Rich Covid Simulation S-I-R-D")
+    plt.xlabel("Time")
+    plt.ylabel("Rich Population")
+    plt.legend()
+    fig3.savefig(output_name3)
+    plt.show()
+
+    output_name4 = "experiments/covid/plots/Poor-SIR%s.png" % time.strftime(
+        "-%m.%d.%y-%H:%M", time.localtime()
+    )
+    fig4 = plt.figure()
+    data = poor
+    plt.plot(data["S"], label="Susceptible", color=(1, 0.5, 0))  # Orange
+    plt.plot(data["I"], label="Infected", color=(1, 0, 0))  # Red
+    plt.plot(data["R"], label="Recovered", color=(0, 1, 0))  # Green
+    plt.plot(data["D"], label="Dead", color=(0, 0, 0))  # Black
+    plt.title("Poor Covid Simulation S-I-R-D")
+    plt.xlabel("Time")
+    plt.ylabel("Poor Population")
+    plt.legend()
+    fig4.savefig(output_name4)
+    plt.show()
+
 
 
 
@@ -130,7 +160,7 @@ class Simulation:
     def plot_simulation(self) -> None:
         """Depending on the type of experiment, plots the final data accordingly"""
         if self.swarm_type == "covid":
-            _plot_covid(self.swarm.points_to_plot, self.swarm.r0)
+            _plot_covid(self.swarm.points_to_plot, self.swarm.r0, self.swarm.rich_plot, self.swarm.poor_plot)
         elif self.swarm_type == "flock":
             _plot_flock()
         elif self.swarm_type == "aggregation":

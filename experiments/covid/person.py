@@ -42,7 +42,6 @@ class Person(Agent):
             self.separation_strength = config[self.group]['separation_strength']
             self.p_infection = config[self.group]['p_infection']
         if self.mode == 'infected': self.change_mode('infected')
-        print(self.separation_strength)
 
     def update_actions(self) -> None:
         neighbours = self.population.find_neighbors(self, self.view_radius)
@@ -138,6 +137,10 @@ class Person(Agent):
                     self.inf_gen = neighbour.inf_gen + 1
                     self.update_r0(self.inf_gen)
                     self.data_update()
+                    if self.group == 'rich':
+                        self.rich_data_update()
+                    elif self.group == 'poor':
+                        self.poor_data_update()
                     self.timer = 0
 
         if self.timer > 300 and self.mode == 'infected':
@@ -179,6 +182,32 @@ class Person(Agent):
                 self.population.datapoints.append('R')
             elif person.mode == 'dead':
                 self.population.datapoints.append('D')
+
+    def rich_data_update(self):
+        self.population.rich_datapoints = []
+        for person in self.population.agents:
+            if person.group == 'rich':
+                if person.mode == 'susceptible':
+                    self.population.rich_datapoints.append('S')
+                elif person.mode == 'infected':
+                    self.population.rich_datapoints.append('I')
+                elif person.mode == 'removed':
+                    self.population.rich_datapoints.append('R')
+                elif person.mode == 'dead':
+                    self.population.rich_datapoints.append('D')
+
+    def poor_data_update(self):
+        self.population.poor_datapoints = []
+        for person in self.population.agents:
+            if person.group == 'poor':
+                if person.mode == 'susceptible':
+                    self.population.poor_datapoints.append('S')
+                elif person.mode == 'infected':
+                    self.population.poor_datapoints.append('I')
+                elif person.mode == 'removed':
+                    self.population.poor_datapoints.append('R')
+                elif person.mode == 'dead':
+                    self.population.poor_datapoints.append('D')
 
     def update_r0(self, index):
         if index in self.population.r0.keys():

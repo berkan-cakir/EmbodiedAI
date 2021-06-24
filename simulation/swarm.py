@@ -39,7 +39,11 @@ class Swarm(pygame.sprite.Sprite):
         self.screen = screen_size
         self.objects: Objects = Objects()
         self.points_to_plot = plot
+        self.rich_plot = plot
+        self.poor_plot = plot
         self.datapoints: list = []
+        self.poor_datapoints: list = []
+        self.rich_datapoints: list = []
 
     def add_agent(self, agent: Agent) -> None:
         """
@@ -120,6 +124,24 @@ class Swarm(pygame.sprite.Sprite):
         for x in values.keys():
             self.points_to_plot[x].append(values[x])
 
+    def add_rich_point(self, lst) -> None:
+        # Count current numbers
+        values = {"S": 0, "I": 0, "R": 0, "D": 0}
+        for state in lst:
+            values[state] += 1
+
+        for x in values.keys():
+            self.rich_plot[x].append(values[x])
+
+    def add_poor_point(self, lst) -> None:
+        # Count current numbers
+        values = {"S": 0, "I": 0, "R": 0, "D": 0}
+        for state in lst:
+            values[state] += 1
+
+        for x in values.keys():
+            self.poor_plot[x].append(values[x])
+
     def update(self) -> None:
         """
         Updates every agent, and if there is any datapoint (i.e. any change in sane-infected-recovered) add it to the
@@ -127,11 +149,18 @@ class Swarm(pygame.sprite.Sprite):
         """
         # update the movement
         self.datapoints = []
+        self.rich_datapoints = []
+        self.poor_datapoints = []
         for agent in self.agents:
             agent.update_actions()
         if self.datapoints:
             self.add_point(self.datapoints)
+        if self.rich_datapoints:
+            self.add_rich_point(self.rich_datapoints)
+        if self.poor_datapoints:
+            self.add_poor_point(self.poor_datapoints)
         self.remain_in_screen()
+
 
     def display(self, screen: pygame.Surface) -> None:
         """

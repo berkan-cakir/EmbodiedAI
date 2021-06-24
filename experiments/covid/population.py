@@ -19,6 +19,9 @@ class Population(Swarm):
         """
         self.r0 = {1: config['base']['inf_index']}
         self.points_to_plot = {'S': [], 'I': [], 'R': [], 'D':[]}
+        if config['person']['groups']:
+            self.rich_plot = {'S': [], 'I': [], 'R': [], 'D':[]}
+            self.poor_plot = {'S': [], 'I': [], 'R': [], 'D': []}
 
         if config["base"]["scenario"] == 'Z':
             self.objects.add_object(file="experiments/covid/images/box.png",
@@ -80,3 +83,4 @@ class Population(Swarm):
                 self.add_agent(Person(pos=np.array(coordinates), v=None, population=self, index=index, mode='infected'))
             else:
                 self.add_agent(Person(pos=np.array(coordinates), v=None, population=self, index=index, mode='susceptible'))
+
