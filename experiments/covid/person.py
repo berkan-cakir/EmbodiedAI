@@ -39,7 +39,8 @@ class Person(Agent):
         self.separation_strength = 3
         if config['person']['groups']:
             num_agents = config['base']['n_agents']
-            self.assign_groups(num_agents, config['person']['ratio_rich_ppl'])
+            rich_r = config['person']['ratio_rich_ppl']
+            self.assign_groups(num_agents, rich_r, height, width)
             self.separation_strength = config[self.group]['separation_strength']
             self.p_infection = config[self.group]['p_infection']
         if self.mode == 'infected': self.change_mode('infected')
@@ -240,10 +241,18 @@ class Person(Agent):
             )
             self.v = 0
 
-    def assign_groups(self,num_agents, ratio_rich_ppl):
+    def assign_groups(self,num_agents, ratio_rich_ppl, height, width):
         rich_num = int(num_agents*ratio_rich_ppl)
         indices = [i for i in range(num_agents)]
         rich_ppl = random.sample(indices,rich_num)
+
         for i in indices:
             self.group = 'rich' if i in rich_ppl else 'poor'
+            if self.group == 'rich':
+                image = 'experiments/covid/images/rich.png'
+            else:
+                image = 'experiments/covid/images/poor.png'
+            base_image, rect = image_with_rect(image, [height, width])
+            self.rect = rect
+            self.image = base_image
 

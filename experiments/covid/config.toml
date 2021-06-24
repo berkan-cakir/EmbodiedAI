@@ -29,7 +29,7 @@ max_force = 8.0
 p_death = [0.003, 0.005, 0.011, 0.03, 0.095, 0.228, 0.296] # Change this
 groups = true # change this
 category = ['rich', 'poor'] # Change this
-ratio_rich_ppl = 1 # Change this
+ratio_rich_ppl = 0.2 # Change this
 
 [rich]
 separation_strength = 4 # Change this
